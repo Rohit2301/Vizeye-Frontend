@@ -1,13 +1,72 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "SansationB";
+    src: url("../public/fonts/sansation/Sansation_Bold.ttf");
+  }
+  @font-face {
+    font-family: "SansationR";
+    src: url("../public/fonts/sansation/Sansation_Regular.ttf");
+  }
+  @font-face {
+    font-family: "PtSerifR";
+    src: url("../public/fonts/ptSerif/PTSerifProRg.OTF");
+  }
+  @font-face {
+    font-family: "PtSerifBK";
+    src: url("../public/fonts/ptSerif/PTSerifProBk.OTF");
+  }
+  @font-face {
+    font-family: "PtSerifCapR";
+    src: url("../public/fonts/ptSerif/PTSerifProCaptRg.OTF");
+  }
+  .bgBlue {
+    background: linear-gradient(
+      105.73deg,
+      #000729 50.54%,
+      #021856 77.65%,
+      #00082f 106.01%
+    );
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer utilities {
+  .navGetStartedBtn {
+    border: none;
+    outline: none;
+    position: relative;
+    border-radius: 20px;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(216, 216, 216, 1)
+    );
+    cursor: pointer;
+    z-index: 1;
+  }
+  .navGetStartedBtn::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 2px;
+    background-color: white;
+    border-radius: 30px;
+    z-index: -1;
+  }
+  .navGetStartedBtn::after {
+    content: attr(data);
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(132, 132, 132, 1)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 }
