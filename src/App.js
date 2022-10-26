@@ -1,7 +1,7 @@
 import Home from "./components/Home/home";
 import Header from "./components/Layouts/Header/header";
 import React from "react";
-import RealTimeFD from "./components/RealTimeFD/realTimeFD";
+import RealTimeFD from "./components/Pages/RealTimeFD/realTimeFD";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
