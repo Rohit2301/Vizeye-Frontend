@@ -8,7 +8,7 @@ import whiteHSquare from "../../../assets/backgroundElement/whiteHSquare.svg";
 
 const HomeBackground = () => {
   return (
-    <div className="w-full overflow-hidden absolute h-full mt-[-1.5rem] z-[-100] top-6 left-0">
+    <div className="w-full overflow-hidden absolute h-full mt-[-1.5rem] top-6 left-0">
       {/* background div */}
       <div className="absolute bottom-0">
         <img src={bottomLeftLines} alt="bottomLeftLines" className="w-96" />

@@ -3,9 +3,9 @@ import { NavGetStartedBtn } from "../../../utils/buttons";
 
 const Header = () => {
   return (
-    <header className="bg-white fixed top-0 py-3 px-8 w-full z-[100] h-[3.56rem]">
+    <header className="realative bg-white py-3 px-8 w-full z-100 h-[3.56rem]">
       {/* navbar container */}
-      <div className="w-full flex justify-between items-center relative">
+      <div className="relative flex justify-between items-center w-full">
         {/* logo container */}
         <div className="w-[9rem]">
           <img
