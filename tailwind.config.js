@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         primary: { blue: "#172153", white: "#ffffff", orange: "#dc5e3c" },
+        pinkish: "#FFF0E9",
       },
       fontFamily: {
         sansationB: [

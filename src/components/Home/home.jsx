@@ -4,7 +4,7 @@ import womenIllustration from "../../assets/images/Womenillust.png";
 
 const Home = () => {
   return (
-    <main className="w-full relative h-screen mt-[-1.5rem] flex flex-col justify-center">
+    <main className="w-full relative h-screen mt-[-1.5rem] flex flex-col justify-center bgBlue">
       <div className="relative flex flex-col items-center justify-around h-full">
         {/* text div */}
         <div className="mt-40">
@@ -33,7 +33,7 @@ const Home = () => {
         {/* illustration */}
       </div>
       {/* background div */}
-      <HomeBackground />
+      <HomeBackground className="z-10" />
       {/* background div */}
     </main>
   );

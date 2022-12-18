@@ -1,7 +1,9 @@
 import Home from "./components/Home/home";
 import Header from "./components/Layouts/Header/header";
+import UploadImage from "./components/Pages/imageScan/UploadImage";
+import RealTimeFD from "./components/Pages/RealTimeFD/realTimeFD";
+import Error from "./components/Pages/404/404";
 import React from "react";
-import RealTimeFD from "./components/RealTimeFD/realTimeFD";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
@@ -10,7 +12,10 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route exact path="/" element={<RealTimeFD />} />
+          {/* <Route exact path="/" element={<Home />} /> */}
+          {/* <Route exact path="/" element={<RealTimeFD />} /> */}
+          {/* <Route exact path="/" element={<UploadImage />} /> */}
+          <Route exact path="/" element={<Error />} />
         </Routes>
       </Router>
     </>
