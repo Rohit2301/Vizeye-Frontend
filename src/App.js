@@ -14,8 +14,8 @@ function App() {
         <Routes>
           {/* <Route exact path="/" element={<Home />} /> */}
           {/* <Route exact path="/" element={<RealTimeFD />} /> */}
-          {/* <Route exact path="/" element={<UploadImage />} /> */}
-          <Route exact path="/" element={<Error />} />
+          <Route exact path="/" element={<UploadImage />} />
+          {/* <Route exact path="/" element={<Error />} /> */}
         </Routes>
       </Router>
     </>

@@ -7,19 +7,13 @@ const NavGetStartedBtn = () => {
     </div>
   );
 };
-const HomeGetStartedBtn = ({ data }) => {
+const HomeGetStartedBtn = ({ data, children }) => {
   return (
-    <div className="font-mons text-xl text-center">
-      <div
-        className="px-4 py-3"
-        style={{
-          background:
-            "linear-gradient(95.91deg, rgba(227, 116, 71, 0.995464) -5.5%, #F56F46 52.62%, rgba(255, 86, 29, 0.99) 97.73%)",
-          borderRadius: "8px",
-        }}
-      >
+    <div className="relative font-mons text-xl text-center orangeBtn rounded-lg">
+      <button className="px-4 py-3">
         {data}
-      </div>
+        {children}
+      </button>
     </div>
   );
 };

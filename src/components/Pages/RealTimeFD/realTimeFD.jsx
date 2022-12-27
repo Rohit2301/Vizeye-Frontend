@@ -11,43 +11,43 @@ const RealTimeFD = () => {
   const imgRef = useRef();
   const canvaRef = useRef();
 
-  // const handleDetections = async () => {
-  //   const detections = await faceapi
-  //     .detectAllFaces(imgRef.current, new faceapi.TinyFaceDetectorOptions())
-  //     .withFaceLandmarks()
-  //     .withFaceExpressions();
+  const handleDetections = async () => {
+    const detections = await faceapi
+      .detectAllFaces(imgRef.current, new faceapi.TinyFaceDetectorOptions())
+      .withFaceLandmarks()
+      .withFaceExpressions();
 
-  //   canvaRef.current.innerHtml = faceapi.createCanvasFromMedia(imgRef.current);
-  //   faceapi.matchDimensions(canvaRef.current, {
-  //     width: 800,
-  //     height: 450,
-  //   });
-  //   const resized = faceapi.resizeResults(detections, {
-  //     width: 800,
-  //     height: 450,
-  //   });
-  //   faceapi.draw.drawDetections(canvaRef.current, resized);
-  // };
+    canvaRef.current.innerHtml = faceapi.createCanvasFromMedia(imgRef.current);
+    faceapi.matchDimensions(canvaRef.current, {
+      width: 800,
+      height: 450,
+    });
+    const resized = faceapi.resizeResults(detections, {
+      width: 800,
+      height: 450,
+    });
+    faceapi.draw.drawDetections(canvaRef.current, resized);
+  };
 
-  // useEffect(() => {
-  //   const loadModels = () => {
-  //     Promise.allSettled([
-  //       faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-  //       faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
-  //       faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-  //       faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
-  //     ])
-  //       .then((values) => {
-  //         console.log(values);
-  //         handleDetections();
-  //       })
-  //       .catch((e) => {
-  //         console.log(e);
-  //       });
-  //   };
+  useEffect(() => {
+    const loadModels = () => {
+      Promise.allSettled([
+        faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
+        faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+        faceapi.nets.faceExpressionNet.loadFromUri("/models"),
+        faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
+      ])
+        .then((values) => {
+          console.log(values);
+          handleDetections();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
 
-  //   imgRef.current && loadModels();
-  // }, []);
+    imgRef.current && loadModels();
+  }, []);
 
   return (
     <div className="relative w-full h-screen bgBlue flex flex-col items-center justify-center gap-y-14 py-12">
