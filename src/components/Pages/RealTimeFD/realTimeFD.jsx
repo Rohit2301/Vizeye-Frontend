@@ -6,10 +6,14 @@ import demoImage from "../../../assets/images/download.jpg";
 import { HomeGetStartedBtn } from "../../../utils/buttons";
 import * as canvas from "canvas";
 import Webcam from "react-webcam";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const RealTimeFD = () => {
   const imgRef = useRef();
   const canvaRef = useRef();
+  const { state } = useLocation();
+  const { url } = useSelector((state) => state.uploadedImage);
 
   const handleDetections = async () => {
     const detections = await faceapi
@@ -30,6 +34,7 @@ const RealTimeFD = () => {
   };
 
   useEffect(() => {
+    console.log(state);
     const loadModels = () => {
       Promise.allSettled([
         faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
@@ -55,11 +60,11 @@ const RealTimeFD = () => {
         {/* <Webcam
           audio={false}
           ref={imgRef}
-          className="w-[800px] h-[450px] relative"
+          className="w-[800px] h-[450px] relative" 
         /> */}
         <img
           crossOrigin="anonymous"
-          src={demoImage}
+          src={url}
           alt="demoImage"
           ref={imgRef}
           className="w-[800px] h-[450px] relative object-contain"

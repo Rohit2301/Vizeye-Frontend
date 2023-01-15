@@ -1,31 +1,46 @@
 import { HomeGetStartedBtn } from "../../../utils/buttons";
 import fileUpload from "../../../assets/images/fileUpload.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { updateImageUrl } from "../../../features/uploadedImage/uploadedImage";
 
 const UploadImage = () => {
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("Browse");
-  const [uploadedFile, setUploadedFile] = useState({});
+  const [uploadedFile, setUploadedFile] = useState();
+  const fileUrl = useRef("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const updateFileName = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
 
+  useEffect(() => {}, [uploadedFile]);
+
   const submitUploadForm = async (e) => {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.append("file", file);
+    formData.append("image", file);
     try {
-      const res = await axios.post("http://localhost:4000", formData, {
+      const res = await axios.post("http://localhost:4000/user", formData, {
         headers: {
           "Content-type": "multipart/form-date",
         },
       });
-      const { fileName, filePath } = res.data;
-      setUploadedFile({ fileName, filePath });
+      const filePath = res.data.filePath;
+      dispatch(updateImageUrl(filePath));
+      navigate("/real");
+
+      // setUploadedFile(filePath);
+      // fileUrl.current = res.data.filePath;
+      // console.log(fileUrl);
+      // navigate("/real", { state: { fileUrl: fileUrl } });
     } catch (err) {
       if (err.response.status === 500) {
         console.log("prob with server");
@@ -34,7 +49,7 @@ const UploadImage = () => {
       } else {
         console.log(err.response.data.msg);
       }
-      console.log(err.config);
+      // console.log(err.config);
     }
   };
 
@@ -104,7 +119,7 @@ const UploadImage = () => {
       </form>
 
       {/* submit button */}
-      <img src={uploadedFile.filePath}></img>
+      {/* <img src={uploadedFile.filePath} alt="uploaded file"></img> */}
     </div>
   );
 };
