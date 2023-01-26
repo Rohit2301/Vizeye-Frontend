@@ -5,35 +5,18 @@ import { createTheme, ThemeProvider } from "@mui/material";
 
 const theme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
       main: "#E37447",
     },
-    secondary: {
-      main: "#FF0000",
-    },
     text: {
-      primary: "#0A0A0A",
+      primary: "#ffffff",
       secondary: "#B0B0B0",
-    },
-  },
-  components: {
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          borderRadius: 20,
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "orange",
-          },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "red",
-          },
-        },
-      },
     },
   },
 });
 
-const AutoSelectFill = ({ data }) => {
+const AutoSelectFill = ({ data, label }) => {
   return (
     <div>
       {
@@ -58,18 +41,12 @@ const AutoSelectFill = ({ data }) => {
               return (
                 <TextField
                   {...params}
-                  label="Language/Locale"
+                  label={label}
                   variant="standard"
                   color="primary"
                   InputLabelProps={{ style: { color: "#B0B0B0" } }}
                   sx={{
                     input: { color: "#ffffff" },
-                    "& .MuiInput-underline:before": {
-                      borderBottomColor: "white",
-                    },
-                    "&:hover .MuiInput-underline:before": {
-                      borderBottomColor: "#E37447",
-                    },
                   }}
                 />
               );
@@ -82,22 +59,3 @@ const AutoSelectFill = ({ data }) => {
 };
 
 export default AutoSelectFill;
-// "&:hover .css-1qpd1ev-MuiFormControl-root-MuiTextField-root":
-//   {
-//     borderBottomColor: "orange",
-//   },
-// "&:hover .MuiInput-root": {
-//   borderBottomColor: "secondary",
-//   // "&:hover fieldset": {
-//   //   borderColor: "yellow",
-//   // },
-//   // "&.Mui-focused fieldset": {
-//   //   borderColor: "green",
-//   // },
-// },
-// "& .css-cpzrrv-MuiInputBase-root-MuiInput-root:before": {},
-// "& .css-cpzrrv-MuiInputBase-root-MuiInput-root": {
-//   color: "secondary",
-// },
-// left: "145%",
-// transition: "left 1s ease-in",

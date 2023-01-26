@@ -75,11 +75,12 @@
     );
   }
   .orangeBtn:hover {
+    cursor: pointer;
     background: linear-gradient(
       95.91deg,
       rgba(201, 103, 63, 0.995464) -5.5%,
-      #e7633b 52.62%,
-      rgba(236, 79, 26, 0.99) 97.73%
+      #d74f26 52.62%,
+      rgba(232, 58, 0, 0.99) 97.73%
     );
   }
 }
