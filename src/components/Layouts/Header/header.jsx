@@ -17,7 +17,7 @@ const Header = () => {
         </div>
         {/* logo container */}
         {/* right navbar elements */}
-        <div className="flex justify-between items-center relative gap-14 px-2">
+        <div className="flex justify-between items-center relative gap-14 px-2 text-black">
           <div>Features</div>
           <div>Docs</div>
           <div>User Guide</div>

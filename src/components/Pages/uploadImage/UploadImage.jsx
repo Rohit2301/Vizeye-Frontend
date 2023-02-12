@@ -78,6 +78,7 @@ const UploadImage = () => {
                 src={fileUpload}
                 alt="fileUpload icon"
                 className="w-18 h-20"
+                draggable="false"
               />
             </div>
             <div className="text-black font-sansationR text-4xl">

@@ -68,6 +68,7 @@ const RealTimeFD = () => {
           alt="demoImage"
           ref={imgRef}
           className="w-[800px] h-[450px] relative object-contain"
+          draggable="false"
         ></img>
         <canvas
           className="w-[800px] h-[450px] z-[10] absolute top-[0px] left-[0px]"

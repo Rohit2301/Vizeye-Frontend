@@ -26,6 +26,7 @@ const Error = () => {
             src={Illus404}
             alt="404 Illustration"
             className="w-[36rem] h-auto"
+            draggable="false"
           />
         </div>
         {/* Illustration */}

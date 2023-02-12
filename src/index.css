@@ -83,4 +83,7 @@
       rgba(232, 58, 0, 0.99) 97.73%
     );
   }
+  .FYTBoxShad {
+    box-shadow: inset 2px 2px 14px rgba(12, 12, 12, 0.7);
+  }
 }

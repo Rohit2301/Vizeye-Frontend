@@ -44,7 +44,7 @@ const AutoSelectFill = ({ data, label }) => {
                   label={label}
                   variant="standard"
                   color="primary"
-                  InputLabelProps={{ style: { color: "#B0B0B0" } }}
+                  InputLabelProps={{ style: { color: "  " } }}
                   sx={{
                     input: { color: "#ffffff" },
                   }}
