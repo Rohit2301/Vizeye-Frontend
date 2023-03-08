@@ -16,14 +16,14 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          {/* <Route exact path="/" element={<Home />} /> */}
+          <Route exact path="/" element={<Home />} />
           {/* <Route exact path="/" element={<RealTimeFD />} /> */}
-          {/* <Route exact path="/" element={<UploadImage />} /> */}
+          <Route exact path="/uploadImage" element={<UploadImage />} />
           {/* <Route exact path="/" element={<Error />} /> */}
           {/* <Route exact path="/" element={<TextToSpeech />} /> */}
           {/* <Route exact path="/" element={<SpeechToText />} /> */}
           {/* <Route exact path="/" element={<ListeningTtS />} /> */}
-          <Route exact path="/" element={<FindYourText />} />
+          {/* <Route exact path="/" element={<FindYourText />} /> */}
         </Routes>
       </Router>
     </>

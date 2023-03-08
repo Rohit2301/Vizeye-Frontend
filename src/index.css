@@ -23,6 +23,18 @@
     font-family: "PtSerifBK";
     src: url("../public/fonts/ptSerif/PTSerifProBk.OTF");
   }
+  @font-face {
+    font-family: "FuturaBk";
+    src: url("../public/fonts/futura/Futura\ Book\ font.ttf");
+  }
+  @font-face {
+    font-family: "FuturaL";
+    src: url("../public/fonts/futura/futura\ light\ bt.ttf");
+  }
+  @font-face {
+    font-family: "FuturaMd";
+    src: url("../public/fonts/futura/futura\ medium\ bt.ttf");
+  }
   .bgBlue {
     background: linear-gradient(
       105.73deg,

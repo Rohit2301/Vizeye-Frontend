@@ -20,11 +20,16 @@ module.exports = {
           "Open Sans",
           ...defaultTheme.fontFamily.sans,
         ],
+
         ptSerifR: ["PTSerifR", ...defaultTheme.fontFamily.serif],
         ptSerifCapR: ["PTSerifCapR", ...defaultTheme.fontFamily.serif],
         ptSerifBK: ["PTSerifBK", ...defaultTheme.fontFamily.serif],
 
         mons: ["Montserrat", ...defaultTheme.fontFamily.sans],
+
+        futuraBk: ["FuturaBk", ...defaultTheme.fontFamily.serif],
+        futuraL: ["FuturaL", ...defaultTheme.fontFamily.serif],
+        futuraMd: ["FuturaMd", ...defaultTheme.fontFamily.serif],
       },
     },
   },

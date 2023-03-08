@@ -6,40 +6,22 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { updateImageUrl } from "../../../features/uploadedImage/uploadedImage";
-import { useDropzone } from "react-dropzone";
-import { useCallback } from "react";
 
 const UploadImage = () => {
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("Browse");
   const [uploadedFile, setUploadedFile] = useState();
+  const [dragActive, setDragActive] = useState(false);
 
   const fileUrl = useRef("");
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onDrop = useCallback((acceptedFiles) => {
-    setFile(acceptedFiles[0]);
-    setFileName(acceptedFiles[0].name);
-  }, []);
-  const {
-    isDragActive,
-    getRootProps,
-    getInputProps,
-    isDragReject,
-    acceptedFiles,
-    rejectedFiles,
-  } = useDropzone({
-    onDrop,
-    accept: {
-      "image/jpeg": [],
-      "image/svg+xml": [],
-      "image/png": [],
-      "image/webp": [],
-    },
-    maxFiles: 1,
-  });
+  const updateFileName = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
 
   const submitUploadForm = async (e) => {
     e.preventDefault();
@@ -72,6 +54,26 @@ const UploadImage = () => {
     }
   };
 
+  // handle drag events
+  const handleDrag = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+  const handleDrop = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFile(e.dataTransfer.files[0]);
+      setFileName(e.dataTransfer.files[0].name);
+    }
+  };
+
   return (
     <div className="relative flex flex-col justify-center items-center bgBlue w-full h-full gap-y-10 pt-12 ">
       {/* text div */}
@@ -87,48 +89,66 @@ const UploadImage = () => {
 
       {/* uploading image div */}
       <form
-        className="relative w-full flex flex-col justify-center items-center"
+        className="reltaive w-full flex flex-col justify-center items-center"
+        onDragEnter={handleDrag}
         onSubmit={submitUploadForm}
       >
-        <div
-          {...getRootProps()}
-          className="relative bg-pinkish w-[80%] pt-14 pb-20 px-20 rounded-lg"
-        >
-          <div className="relative flex flex-col justify-content items-center py-10 outline-dashed outline-[#C6C6C6] outline-[4px] rounded-lg bg-[#D9D9D9]">
-            <input {...getInputProps()} />
-            {/* {fileName === "Browse" ? ( */}
-            {/* <> */}
-            <div className="pb-2">
-              <img
-                src={fileUpload}
-                alt="fileUpload icon"
-                className="w-18 h-20"
-                draggable="false"
-              />
-            </div>
-            <div className="text-black font-sansationR text-4xl">
-              {!isDragActive && "Click here or drop a file to upload!"}
-              {isDragActive && "Drop it like it's hot!"}
-              {isDragReject && "File type not accepted, sorry!"}
-            </div>
-            <div>
-              <div
-                className="mt-6"
-                style={{
-                  filter: "drop-shadow(4px 2px 4px rgba(0, 0, 0, 0.25))",
-                }}
-              >
-                {<HomeGetStartedBtn data={fileName} />}
+        <div className="relative bg-pinkish w-[80%] pt-14 pb-20 px-20 rounded-lg">
+          <input
+            className="hidden"
+            ref={inputRef}
+            type="file"
+            id="input-file-upload"
+            multiple={true}
+            onChange={updateFileName}
+          />
+          <label
+            className="h-full"
+            id="label-file-upload"
+            htmlFor="input-file-upload"
+          >
+            <div
+              className={`relative flex flex-col justify-content items-center py-10 outline-dashed outline-[#C6C6C6] outline-[4px] rounded-lg ${
+                !dragActive ? "bg-[#D9D9D9]" : "bg-[#e9e9e9]"
+              }`}
+            >
+              <div className="pb-2">
+                <img
+                  src={fileUpload}
+                  alt="fileUpload icon"
+                  className="w-18 h-20"
+                  draggable="false"
+                />
+              </div>
+              <div className="text-black font-sansationR text-4xl">
+                Drag, Drop and <br /> Upload Image
+              </div>
+              <div>
+                <div
+                  className="mt-6"
+                  style={{
+                    filter: "drop-shadow(4px 2px 4px rgba(0, 0, 0, 0.25))",
+                  }}
+                  onClick={() => {
+                    inputRef.current.click();
+                  }}
+                >
+                  {<HomeGetStartedBtn data={fileName} />}
+                </div>
               </div>
             </div>
-            {/* </> */}
-            {/* ) : ( */}
-            {/* "" */}
-            {/* // { fileName } */}
-            {/* )} */}
-          </div>
-          {/* uploading image div */}
+          </label>
+          {dragActive && (
+            <div
+              className="absolute inset-0 h-full w-full"
+              onDragEnter={handleDrag}
+              onDragLeave={handleDrag}
+              onDragOver={handleDrag}
+              onDrop={handleDrop}
+            />
+          )}
         </div>
+        {/* uploading image div */}
 
         {/* submit button */}
         <div
