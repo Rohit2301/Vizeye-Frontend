@@ -11,11 +11,8 @@ import { useCallback } from "react";
 
 const UploadImage = () => {
   const [file, setFile] = useState("");
-  const [fileName, setFileName] = useState("Browse");
-  const [uploadedFile, setUploadedFile] = useState();
+  const [fileName, setFileName] = useState("");
 
-  const fileUrl = useRef("");
-  const inputRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,6 +20,7 @@ const UploadImage = () => {
     setFile(acceptedFiles[0]);
     setFileName(acceptedFiles[0].name);
   }, []);
+
   const {
     isDragActive,
     getRootProps,
@@ -44,7 +42,6 @@ const UploadImage = () => {
   const submitUploadForm = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-
     formData.append("image", file);
     try {
       const res = await axios.post("http://localhost:4000/user", formData, {
@@ -54,7 +51,7 @@ const UploadImage = () => {
       });
       const filePath = res.data.filePath;
       dispatch(updateImageUrl(filePath));
-      navigate("/real");
+      navigate("/faceExpResolver");
 
       // setUploadedFile(filePath);
       // fileUrl.current = res.data.filePath;
@@ -96,21 +93,25 @@ const UploadImage = () => {
         >
           <div className="relative flex flex-col justify-content items-center py-10 outline-dashed outline-[#C6C6C6] outline-[4px] rounded-lg bg-[#D9D9D9]">
             <input {...getInputProps()} />
-            {/* {fileName === "Browse" ? ( */}
-            {/* <> */}
-            <div className="pb-2">
-              <img
-                src={fileUpload}
-                alt="fileUpload icon"
-                className="w-18 h-20"
-                draggable="false"
-              />
-            </div>
-            <div className="text-black font-sansationR text-4xl">
-              {!isDragActive && "Click here or drop a file to upload!"}
-              {isDragActive && "Drop it like it's hot!"}
-              {isDragReject && "File type not accepted, sorry!"}
-            </div>
+            {fileName.length === 0 ? (
+              <>
+                <div className="pb-2">
+                  <img
+                    src={fileUpload}
+                    alt="fileUpload icon"
+                    className="w-18 h-20"
+                    draggable="false"
+                  />
+                </div>
+                <div className="text-black font-sansationR text-4xl">
+                  {!isDragActive && "Click here or drop a file to upload!"}
+                  {isDragActive && "Drop it like it's hot!"}
+                  {isDragReject && "File type not accepted, sorry!"}
+                </div>
+              </>
+            ) : (
+              <div>{fileName}</div>
+            )}
             <div>
               <div
                 className="mt-6"
@@ -118,14 +119,9 @@ const UploadImage = () => {
                   filter: "drop-shadow(4px 2px 4px rgba(0, 0, 0, 0.25))",
                 }}
               >
-                {<HomeGetStartedBtn data={fileName} />}
+                {<HomeGetStartedBtn data={"Browse"} />}
               </div>
             </div>
-            {/* </> */}
-            {/* ) : ( */}
-            {/* "" */}
-            {/* // { fileName } */}
-            {/* )} */}
           </div>
           {/* uploading image div */}
         </div>
@@ -143,8 +139,6 @@ const UploadImage = () => {
         </div>
         {/* submit button */}
       </form>
-
-      {/* <img src={uploadedFile.filePath} alt="uploaded file"></img> */}
     </div>
   );
 };

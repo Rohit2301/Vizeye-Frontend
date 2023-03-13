@@ -1,84 +1,183 @@
-import React, { useRef } from "react";
-import { useEffect, useState } from "react";
 import * as faceapi from "face-api.js";
-import * as tf from "@tensorflow/tfjs";
-import demoImage from "../../../assets/images/download.jpg";
-import { HomeGetStartedBtn } from "../../../utils/buttons";
-import * as canvas from "canvas";
-import Webcam from "react-webcam";
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 
 const RealTimeFD = () => {
-  const imgRef = useRef();
-  const canvaRef = useRef();
-  const { state } = useLocation();
-  const { url } = useSelector((state) => state.uploadedImage);
+  const [modelsLoaded, setModelsLoaded] = React.useState(false);
+  const [captureVideo, setCaptureVideo] = React.useState(false);
+  const [intervalId, setIntervalId] = useState();
 
-  const handleDetections = async () => {
-    const detections = await faceapi
-      .detectAllFaces(imgRef.current, new faceapi.TinyFaceDetectorOptions())
-      .withFaceLandmarks()
-      .withFaceExpressions();
+  const videoRef = React.useRef();
+  const videoHeight = 480;
+  const videoWidth = 640;
+  const canvasRef = React.useRef();
 
-    canvaRef.current.innerHtml = faceapi.createCanvasFromMedia(imgRef.current);
-    faceapi.matchDimensions(canvaRef.current, {
-      width: 800,
-      height: 450,
-    });
-    const resized = faceapi.resizeResults(detections, {
-      width: 800,
-      height: 450,
-    });
-    faceapi.draw.drawDetections(canvaRef.current, resized);
-  };
-
-  useEffect(() => {
-    console.log(state);
-    const loadModels = () => {
-      Promise.allSettled([
-        faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-        faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
-        faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-        faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
-      ])
-        .then((values) => {
-          console.log(values);
-          handleDetections();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+  React.useEffect(() => {
+    const loadModels = async () => {
+      const MODEL_URL = "/models";
+      Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+        faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+        faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+        faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+        faceapi.nets.mtcnn.loadFromUri(MODEL_URL),
+      ]).then(() => {
+        setModelsLoaded(true);
+      });
     };
-
-    imgRef.current && loadModels();
+    loadModels();
   }, []);
 
+  const startVideo = () => {
+    setCaptureVideo(true);
+    navigator.mediaDevices
+      .getUserMedia({ video: { width: 300 } })
+      .then((stream) => {
+        let video = videoRef.current;
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch((err) => {
+        console.error("error:", err);
+      });
+  };
+  // const mtcnnParams = {
+  //   // number of scaled versions of the input image passed through the CNN
+  //   // of the first stage, lower numbers will result in lower inference time,
+  //   // but will also be less accurate
+  //   maxNumScales: 10,
+  //   // scale factor used to calculate the scale steps of the image
+  //   // pyramid used in stage 1
+  //   scaleFactor: 0.709,
+  //   // the score threshold values used to filter the bounding
+  //   // boxes of stage 1, 2 and 3
+  //   scoreThresholds: [0.6, 0.7, 0.7],
+  //   // mininum face size to expect, the higher the faster processing will be,
+  //   // but smaller faces won't be detected
+  //   minFaceSize: 150,
+  // };
+  // const options = new faceapi.MtcnnOptions(mtcnnParams);
+
+  const handleVideoOnPlay = () => {
+    const id = setInterval(async () => {
+      if (videoRef && videoRef.current && canvasRef && canvasRef.current) {
+        canvasRef.current.innerHTML = faceapi.createCanvas(videoRef.current);
+        // canvasRef.current.getContext("2d", { willReadFrequently: true });
+        const displaySize = {
+          width: videoWidth,
+          height: videoHeight,
+        };
+
+        faceapi.matchDimensions(canvasRef.current, displaySize);
+
+        const detections = await faceapi
+          .detectAllFaces(
+            videoRef.current,
+            new faceapi.TinyFaceDetectorOptions()
+          )
+          .withFaceLandmarks()
+          .withFaceExpressions();
+
+        const resizedDetections = faceapi.resizeResults(
+          detections,
+          displaySize
+        );
+
+        canvasRef &&
+          canvasRef.current &&
+          canvasRef.current
+            .getContext("2d")
+            .clearRect(0, 0, videoWidth, videoHeight);
+        canvasRef &&
+          canvasRef.current &&
+          faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
+        canvasRef &&
+          canvasRef.current &&
+          faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
+        canvasRef &&
+          canvasRef.current &&
+          faceapi.draw.drawFaceExpressions(
+            canvasRef.current,
+            resizedDetections
+          );
+      }
+    }, 100);
+    setIntervalId(id);
+  };
+
+  const closeWebcam = () => {
+    videoRef.current.pause();
+    videoRef.current.srcObject.getTracks()[0].stop();
+    setCaptureVideo(false);
+    clearInterval(intervalId);
+  };
+
   return (
-    <div className="relative w-full h-screen bgBlue flex flex-col items-center justify-center gap-y-14 py-12">
-      <div className="relative w-[45%] h-3/4 flex items-between justify-center">
-        {/* <Webcam
-          audio={false}
-          ref={imgRef}
-          className="w-[800px] h-[450px] relative" 
-        /> */}
-        <img
-          crossOrigin="anonymous"
-          src={url}
-          alt="demoImage"
-          ref={imgRef}
-          className="w-[800px] h-[450px] relative object-contain"
-          draggable="false"
-        ></img>
-        <canvas
-          className="w-[800px] h-[450px] z-[10] absolute top-[0px] left-[0px]"
-          ref={canvaRef}
-        ></canvas>
+    <div>
+      <div style={{ textAlign: "center", padding: "10px" }}>
+        {captureVideo && modelsLoaded ? (
+          <button
+            onClick={closeWebcam}
+            style={{
+              cursor: "pointer",
+              backgroundColor: "green",
+              color: "white",
+              padding: "15px",
+              fontSize: "25px",
+              border: "none",
+              borderRadius: "10px",
+            }}
+          >
+            Close Webcam
+          </button>
+        ) : (
+          <button
+            onClick={startVideo}
+            style={{
+              cursor: "pointer",
+              backgroundColor: "green",
+              color: "white",
+              padding: "15px",
+              fontSize: "25px",
+              border: "none",
+              borderRadius: "10px",
+            }}
+          >
+            Open Webcam
+          </button>
+        )}
       </div>
-      <div className="flex items-between justify-center gap-x-40">
-        <div className="">{<HomeGetStartedBtn data={"Start Video"} />}</div>
-        <div className="">{<HomeGetStartedBtn data={"Start Video"} />}</div>
-      </div>
+      {captureVideo ? (
+        modelsLoaded ? (
+          <div>
+            <div
+              className="relative"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "10px",
+              }}
+            >
+              <video
+                ref={videoRef}
+                height={videoHeight}
+                width={videoWidth}
+                onPlay={handleVideoOnPlay}
+                style={{ borderRadius: "10px" }}
+                className="absolute top-0 left-0"
+              />
+              <canvas
+                ref={canvasRef}
+                style={{ position: "absolute" }}
+                className="left-0 top-0 z-10"
+              />
+            </div>
+          </div>
+        ) : (
+          <div>loading...</div>
+        )
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

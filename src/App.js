@@ -7,6 +7,7 @@ import TextToSpeech from "./components/Pages/text-to-speech/text-to-speech";
 import SpeechToText from "./components/Pages/speechToText/speechToText";
 import ListeningTtS from "./components/Pages/text-to-speech/listeningTtS";
 import FindYourText from "./components/Pages/findYourText/findYourText";
+import FaceExpResolver from "./components/Pages/faceExpResolv/faceExpResolv";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -17,7 +18,8 @@ function App() {
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          {/* <Route exact path="/" element={<RealTimeFD />} /> */}
+          <Route exact path="/realtimefd" element={<RealTimeFD />} />
+          <Route exact path="/faceExpResolver" element={<FaceExpResolver />} />
           <Route exact path="/uploadImage" element={<UploadImage />} />
           {/* <Route exact path="/" element={<Error />} /> */}
           {/* <Route exact path="/" element={<TextToSpeech />} /> */}
