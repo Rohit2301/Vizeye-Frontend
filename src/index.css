@@ -35,12 +35,33 @@
     font-family: "FuturaMd";
     src: url("../public/fonts/futura/futura\ medium\ bt.ttf");
   }
-  .bgBlue {
+  .darkBlueBg {
     background: linear-gradient(
-      105.73deg,
-      #000729 50.54%,
-      #021856 77.65%,
-      #00082f 106.01%
+      72.45deg,
+      #000729 13.42%,
+      #001438 61.92%,
+      #002147 90.63%
+    );
+  }
+  .lightbg {
+    background: linear-gradient(
+      89.89deg,
+      #c8d4e3 0.11%,
+      #daf1ff 25.37%,
+      #e7fbff 51.89%,
+      #d1e6eb 78.4%,
+      #ede4f5 99.27%
+    );
+    mix-blend-mode: normal;
+  }
+  .lightBlueBg {
+    background: linear-gradient(
+      73.36deg,
+      #021a40 12.09%,
+      #08234c 27.2%,
+      #1d3258 50.33%,
+      #17315d 70.15%,
+      #3a4b71 91.37%
     );
   }
 }
@@ -97,5 +118,26 @@
   }
   .FYTBoxShad {
     box-shadow: inset 2px 2px 14px rgba(12, 12, 12, 0.7);
+  }
+  .signup {
+    background-image: url("./assets/images/woman-enjoying-vr-headset.jpg");
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .signin {
+    background-image: url("https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"),
+      linear-gradient(
+        89.89deg,
+        #c8d4e3 0.11%,
+        #daf1ff 25.37%,
+        #e7fbff 51.89%,
+        #d1e6eb 78.4%,
+        #ede4f5 99.27%
+      );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 }

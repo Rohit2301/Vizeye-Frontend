@@ -70,7 +70,7 @@ const UploadImage = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center items-center bgBlue w-full h-full gap-y-10 pt-12 ">
+    <div className="relative flex flex-col justify-center items-center darkBlueBg w-full h-full gap-y-10 pt-12 ">
       {/* text div */}
       <div className="relative flex flex-col justify-content items-center text-white gap-y-8">
         <div className="text-6xl font-sansationR">Scan your image</div>

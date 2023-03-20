@@ -1,9 +1,10 @@
 import Illus404 from "../../../assets/images/Illus 404.png";
 import { HomeGetStartedBtn } from "../../../utils/buttons";
+import { Link } from "react-router-dom";
 
 const Error = () => {
   return (
-    <div className="relative flex flex-col w-full bgBlue justify-center items-center gap-y-20 pt-16 pb-10">
+    <div className="relative flex flex-col w-full darkBlueBg justify-center items-center gap-y-20 pt-16 pb-10">
       {/* illustrainot + button */}
       <div className="relative flex justify-between items-center w-full px-36 gap-x-20 mt-10">
         {/* text + home btn */}
@@ -11,12 +12,16 @@ const Error = () => {
           <div className="font-sansationR text-5xl py-16 leading-tight">
             Wow, You’ve found a page that doesn’t exists!
           </div>
-          <div
-            className="w-36"
-            style={{ filter: "drop-shadow(6px 6px 9px #000000)" }}
-          >
-            <HomeGetStartedBtn data={"Home"} />
-          </div>
+          <Link to={"/"}>
+            <div
+              className="w-32"
+              style={{ filter: "drop-shadow(1px 1px 0px #cccbcb)" }}
+            >
+              <div className="relative font-futuraMd text-3xl text-[#ffffff] text-center orangeBtn rounded-lg">
+                <button className="py-2">Home</button>
+              </div>
+            </div>
+          </Link>
         </div>
         {/* text + home btn */}
 

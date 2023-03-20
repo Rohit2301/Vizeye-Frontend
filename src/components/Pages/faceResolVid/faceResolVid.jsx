@@ -48,7 +48,7 @@ const FaceExpResolver = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen bgBlue flex flex-col items-center justify-center gap-y-14 py-12">
+    <div className="relative w-full h-screen darkBlueBg flex flex-col items-center justify-center gap-y-14 py-12">
       <div className="relative w-[45%] h-3/4 flex items-between justify-center">
         <img
           crossOrigin="anonymous"

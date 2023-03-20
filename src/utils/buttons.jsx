@@ -76,7 +76,16 @@ const SpeechToTextStopBtn = ({ data, children, text, icon }) => {
   );
 };
 
+const BlueGradientBtn = ({ data }) => {
+  return (
+    <div className="text-white text-xl lightBlueBg rounded-md text-center font-mons py-2 cursor-pointer">
+      {data}
+    </div>
+  );
+};
+
 export { SpeechToTextStopBtn };
 export { TextToSpeechStartNowBtn };
 export { HomeGetStartedBtn };
 export { NavGetStartedBtn };
+export { BlueGradientBtn };

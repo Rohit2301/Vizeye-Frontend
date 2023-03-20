@@ -10,7 +10,7 @@ const languageOption = [
 
 const SpeechToText = () => {
   return (
-    <div className="relative w-full h-screen bgBlue flex flex-col items-center gap-y-14 py-12 px-20">
+    <div className="relative w-full h-screen darkBlueBg flex flex-col items-center gap-y-14 py-12 px-20">
       {/* text div */}
       <div className="relative flex flex-col justify-content items-center text-white gap-y-16">
         <div className="text-5xl font-sansationR">
