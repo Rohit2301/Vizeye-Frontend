@@ -12,9 +12,11 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { secondary } from "daisyui/src/colors";
-import SignUpIllus from "../../assets/images/signupIllus.jpg";
-
+import { auth } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { signIn } from "../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 function Copyright(props) {
   return (
     <Typography
@@ -46,13 +48,37 @@ const theme = createTheme({
 });
 
 const SignUp = () => {
-  const handleSubmit = (event) => {
+  // const [loading, setLoading] = useState();
+  // const [error, setError] = useState();
+  const { error, loading, isAuthenticated, user } = useSelector(
+    (state) => state.user
+  );
+  const dispatch = useDispatch();
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const email = data.get("email");
+    const password = data.get("password");
+    dispatch(signIn({ auth, email, password }));
+
+    // createUserWithEmailAndPassword(
+    //   auth,
+    //   data.get("email"),
+    //   data.get("password")
+    // )
+    //   .then((userCredential) => {
+    //     // Signed in
+    //     const user = userCredential.user;
+    //     console.log(user);
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     setError(errorCode);
+    //     console.log(errorCode, errorMessage);
+    //     // ..
+    //   });
   };
 
   return (
@@ -95,9 +121,20 @@ const SignUp = () => {
             <Avatar sx={{ m: 1, bgcolor: "#f3a57d" }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h5" variant="h5">
               Sign in
             </Typography>
+            {error ? (
+              <Typography
+                component="h5"
+                variant="h6"
+                style={{ color: "#f44336" }}
+              >
+                {error}
+              </Typography>
+            ) : (
+              ""
+            )}
             <Box
               component="form"
               noValidate
@@ -143,7 +180,7 @@ const SignUp = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Sign Up
               </Button>
               <Grid container>
                 <Grid item xs>

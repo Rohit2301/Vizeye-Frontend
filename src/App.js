@@ -20,16 +20,16 @@ function App() {
         <Header />
         <div className="h-[3.56rem]" />
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/realtimefd" element={<RealTimeFD />} />
-          <Route exact path="/faceExpResolver" element={<FaceExpResolver />} />
-          <Route exact path="/uploadImage" element={<UploadImage />} />
-          <Route exact path="/signUp" element={<SignUp />} />
-          <Route exact path="/signIn" element={<SignIn />} />
-          {/* <Route exact path="/" element={<TextToSpeech />} /> */}
-          {/* <Route exact path="/" element={<SpeechToText />} /> */}
-          {/* <Route exact path="/" element={<ListeningTtS />} /> */}
-          {/* <Route exact path="/" element={<FindYourText />} /> */}
+          <Route path="/" element={<Home />} />
+          <Route path="/realtimefd" element={<RealTimeFD />} />
+          <Route path="/faceExpResolver" element={<FaceExpResolver />} />
+          <Route path="/uploadImage" element={<UploadImage />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/signIn" element={<SignIn />} />
+          {/* <Route  path="/" element={<TextToSpeech />} /> */}
+          {/* <Route  path="/" element={<SpeechToText />} /> */}
+          {/* <Route  path="/" element={<ListeningTtS />} /> */}
+          {/* <Route  path="/" element={<FindYourText />} /> */}
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>

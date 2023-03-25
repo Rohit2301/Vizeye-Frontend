@@ -5,7 +5,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { updateImageUrl } from "../../../features/uploadedImage/uploadedImage";
+import { updateImageUrl } from "../../../redux/uploadedImage/uploadedImage";
 
 const UploadImage = () => {
   const [file, setFile] = useState("");

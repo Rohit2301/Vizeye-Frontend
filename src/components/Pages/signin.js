@@ -12,7 +12,11 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { secondary } from "daisyui/src/colors";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useState } from "react";
+import { signIn } from "../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Copyright(props) {
   return (
@@ -45,13 +49,27 @@ const theme = createTheme({
 });
 
 const SignIn = () => {
+  // const [loading, setLoading] = useState();
+  // const [error, setError] = useState();
+  const { error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    dispatch(signIn(auth, data.get("email"), data.get("password")));
+    // signInWithEmailAndPassword(auth, data.get("email"), data.get("password"))
+    //   .then((userCredential) => {
+    //     // Signed in
+    //     const user = userCredential.user;
+    //     console.log(user);
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     setError(errorCode);
+    //     console.log(errorCode, errorMessage);
+    //   });
   };
 
   return (
@@ -95,6 +113,17 @@ const SignIn = () => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            {error ? (
+              <Typography
+                component="h5"
+                variant="h5"
+                style={{ color: "#f44336" }}
+              >
+                {error}
+              </Typography>
+            ) : (
+              ""
+            )}
             <Box
               component="form"
               noValidate

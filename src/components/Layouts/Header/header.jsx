@@ -2,42 +2,30 @@ import Logo from "../../../assets/Logo.png";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import dropDownArrow from "../../../assets/images/dropDownArrow.png";
-import { useContext } from "react";
-import { Context } from "../../../contexts/context";
+import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../../firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { useState } from "react";
-
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { updateCurrentUser } from "../../../redux/userSlice";
 const Header = () => {
-  const context = useContext(Context);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+  const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  useEffect(() => {
+    const unsubcribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(user);
+        dispatch(updateCurrentUser(user.email));
+      } else {
+        // User is signed out
+        dispatch(updateCurrentUser(null));
+      }
     });
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
+    return () => {
+      unsubcribe();
+    };
+  }, []);
+  // if (isAuthenticated) console.log(user);
   return (
     <header
       className="fixed py-3 px-8 w-full z-50 h-[3.56rem] text-white border-b-[0.5px] border-[#5f5f5f]"
@@ -80,11 +68,7 @@ const Header = () => {
             </div>
           </div>
           <Link to="/signIn">
-            <div className="cursor-pointer">
-              {context.currentUser.length === 0
-                ? "Log In"
-                : context.currentUser}
-            </div>
+            <div className="cursor-pointer">{!user ? "Log Inas" : user}</div>
           </Link>
           <div>
             <div
