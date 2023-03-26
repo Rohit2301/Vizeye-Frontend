@@ -53,10 +53,11 @@ const SignIn = () => {
   // const [error, setError] = useState();
   const { error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     dispatch(signIn(auth, data.get("email"), data.get("password")));
+
     // signInWithEmailAndPassword(auth, data.get("email"), data.get("password"))
     //   .then((userCredential) => {
     //     // Signed in
@@ -94,6 +95,8 @@ const SignIn = () => {
           elevation={6}
           square
           style={{
+            paddingRight: "3rem",
+            paddingLeft: "3rem",
             background:
               "linear-gradient(73.36deg,#021a40 12.09%,#08234c 27.2%,#1d3258 50.33%,#17315d 70.15%,#3a4b71 91.37%)",
           }}

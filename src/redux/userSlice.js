@@ -3,11 +3,12 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 export const signUp = createAsyncThunk(
   "user/signUp",
-  async ({ auth, email, password }, { rejectWithValue }) => {
+  async ({ auth, email, password, name }, { rejectWithValue, dispatch }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -16,7 +17,8 @@ export const signUp = createAsyncThunk(
       );
       // Signed in
       const user = userCredential.user.email;
-      return user;
+      await updateProfile(auth.currentUser, { displayName: name });
+      return { email: user, name: name };
       // ...
     } catch (error) {
       return rejectWithValue();
@@ -47,6 +49,7 @@ export const logOut = createAsyncThunk(
     try {
       await signOut(auth);
     } catch (error) {
+      console.log(error);
       rejectWithValue();
     }
   }
@@ -55,9 +58,9 @@ export const logOut = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: null,
     loading: false,
     isAuthenticated: false,
+    user: null,
     error: null,
   },
   reducers: {
@@ -71,6 +74,7 @@ export const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(signUp.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.isAuthenticated = true;
         state.error = null;
         state.user = action.payload;

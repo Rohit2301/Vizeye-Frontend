@@ -15,8 +15,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { signIn } from "../../redux/userSlice";
+import { signUp } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 function Copyright(props) {
   return (
     <Typography
@@ -48,6 +51,7 @@ const theme = createTheme({
 });
 
 const SignUp = () => {
+  const navigate = useNavigate();
   // const [loading, setLoading] = useState();
   // const [error, setError] = useState();
   const { error, loading, isAuthenticated, user } = useSelector(
@@ -57,9 +61,25 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const name = data.get("name");
     const email = data.get("email");
     const password = data.get("password");
-    dispatch(signIn({ auth, email, password }));
+    dispatch(signUp({ auth, email, password, name }));
+    const jsonData = {
+      name: name,
+      email: email,
+    };
+    // try {
+    //   const res = await axios.post("http://localhost:4000/user", jsonData, {
+    //     headers: {
+    //       "Content-type": "application/x-www-form-urlencoded",
+    //     },
+    //   });
+    //   console.log(res);
+    // } catch (e) {
+    //   console.log("error in axios request of signup");
+    // }
+    navigate("/");
 
     // createUserWithEmailAndPassword(
     //   auth,

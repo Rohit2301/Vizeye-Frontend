@@ -38,6 +38,9 @@ const UploadImage = () => {
     },
     maxFiles: 1,
   });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const submitUploadForm = async (e) => {
     e.preventDefault();

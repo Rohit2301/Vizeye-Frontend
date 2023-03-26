@@ -5,19 +5,23 @@ import dropDownArrow from "../../../assets/images/dropDownArrow.png";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updateCurrentUser } from "../../../redux/userSlice";
+import ProfileModal from "./profileModal";
+import DemoProfileAvatar from "../../../assets/images/profile avataar.png";
+
 const Header = () => {
   const dispatch = useDispatch();
-  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
-        console.log(user);
-        dispatch(updateCurrentUser(user.email));
+        dispatch(
+          updateCurrentUser({ email: user.email, name: user.displayName })
+        );
       } else {
-        // User is signed out
         dispatch(updateCurrentUser(null));
       }
     });
@@ -25,7 +29,7 @@ const Header = () => {
       unsubcribe();
     };
   }, []);
-  // if (isAuthenticated) console.log(user);
+
   return (
     <header
       className="fixed py-3 px-8 w-full z-50 h-[3.56rem] text-white border-b-[0.5px] border-[#5f5f5f]"
@@ -68,22 +72,48 @@ const Header = () => {
             </div>
           </div>
           <Link to="/signIn">
-            <div className="cursor-pointer">{!user ? "Log Inas" : user}</div>
+            <div className="cursor-pointer">{!user ? "Log In" : ""}</div>
           </Link>
+
           <div>
-            <div
-              style={{
-                backgroundImage:
-                  "conic-gradient(from 180deg at 50% 50%, #09F9FC -141.38deg, #F704FB 31.12deg, #09F9FC 218.62deg, #F704FB 391.12deg)",
-              }}
-              className="px-[3px] py-[3px] rounded-xl cursor-pointer"
-            >
-              <div className="bg-[#001236] px-2 py-1 rounded-xl">
-                Get Started
+            {user ? (
+              <div
+                className="w-10 cursor-pointer"
+                onClick={() => {
+                  setShowModal(!showModal);
+                  console.log(showModal);
+                }}
+              >
+                <img
+                  src={DemoProfileAvatar}
+                  alt="Profile Pic"
+                  style={{ borderRadius: "50%" }}
+                />
               </div>
-            </div>
+            ) : (
+              <Link to="/signUp">
+                <div
+                  style={{
+                    backgroundImage:
+                      "conic-gradient(from 180deg at 50% 50%, #09F9FC -141.38deg, #F704FB 31.12deg, #09F9FC 218.62deg, #F704FB 391.12deg)",
+                  }}
+                  className="px-[3px] py-[3px] rounded-xl cursor-pointer"
+                >
+                  <div className="bg-[#001236] px-2 py-1 rounded-xl">
+                    Get Started
+                  </div>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
+        {showModal ? (
+          <div className="absolute top-14 right-4">
+            <ProfileModal showModal={showModal} setShowModal={setShowModal} />
+          </div>
+        ) : (
+          ""
+        )}
         {/* right navbar elements */}
       </div>
       {/* navbar container */}
