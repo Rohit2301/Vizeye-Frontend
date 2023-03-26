@@ -8,7 +8,7 @@ const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState("");
-  const { loading } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.loader);
 
   const value = {
     currentUser,

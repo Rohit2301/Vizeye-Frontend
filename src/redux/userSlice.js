@@ -5,10 +5,12 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { updateLoader } from "./loader";
 
 export const signUp = createAsyncThunk(
   "user/signUp",
   async ({ auth, email, password, name }, { rejectWithValue, dispatch }) => {
+    dispatch(updateLoader(true));
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -18,9 +20,11 @@ export const signUp = createAsyncThunk(
       // Signed in
       const user = userCredential.user.email;
       await updateProfile(auth.currentUser, { displayName: name });
+      dispatch(updateLoader(false));
       return { email: user, name: name };
       // ...
     } catch (error) {
+      dispatch(updateLoader(false));
       return rejectWithValue();
     }
   }
@@ -28,7 +32,8 @@ export const signUp = createAsyncThunk(
 
 export const signIn = createAsyncThunk(
   "user/signIn",
-  async ({ auth, email, password }, { rejectWithValue }) => {
+  async ({ auth, email, password }, { rejectWithValue, dispatch }) => {
+    dispatch(updateLoader(true));
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -36,8 +41,11 @@ export const signIn = createAsyncThunk(
         password
       );
       const user = userCredential.user.email;
+      dispatch(updateLoader(false));
       return user;
     } catch (error) {
+      dispatch(updateLoader(false));
+
       return rejectWithValue();
     }
   }
@@ -45,11 +53,14 @@ export const signIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk(
   "user/logOut",
-  async ({ auth }, rejectWithValue) => {
+  async ({ auth }, { rejectWithValue, dispatch }) => {
+    dispatch(updateLoader(true));
     try {
       await signOut(auth);
+      dispatch(updateLoader(false));
     } catch (error) {
       console.log(error);
+      dispatch(updateLoader(false));
       rejectWithValue();
     }
   }

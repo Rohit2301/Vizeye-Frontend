@@ -63,7 +63,7 @@ const FaceExpResolver = () => {
           className="w-[800px] h-[450px] relative object-contain"
           draggable="false"
         ></img>
-        <canvas className="z-[10] absolute" ref={canvaRef}></canvas>
+        <canvas className="z-[10] absolute" ref={canvaRef} />
       </div>
     </div>
   );

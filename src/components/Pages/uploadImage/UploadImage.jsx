@@ -4,14 +4,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { updateImageUrl } from "../../../redux/uploadedImage/uploadedImage";
+import { useDispatch, useSelector } from "react-redux";
+import { updateImageUrl } from "../../../redux/uploadedImage";
 import { useDropzone } from "react-dropzone";
 import { useCallback } from "react";
+import { updateLoader } from "../../../redux/loader";
 
 const UploadImage = () => {
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("");
+  const { loading } = useSelector((state) => state.loader);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,27 +49,38 @@ const UploadImage = () => {
     const formData = new FormData();
     formData.append("image", file);
     try {
-      const res = await axios.post("http://localhost:4000/user", formData, {
-        headers: {
-          "Content-type": "multipart/form-date",
-        },
-      });
+      dispatch(updateLoader(true));
+      console.log("upldaofin");
+      const res = await axios.post(
+        "http://localhost:4000/uploadImage",
+        formData,
+        {
+          headers: {
+            "Content-type": "multipart/form-date",
+          },
+        }
+      );
       const filePath = res.data.filePath;
       dispatch(updateImageUrl(filePath));
+      dispatch(updateLoader(false));
+
       navigate("/faceExpResolver");
 
       // setUploadedFile(filePath);
       // fileUrl.current = res.data.filePath;
       // console.log(fileUrl);
       // navigate("/real", { state: { fileUrl: fileUrl } });
-    } catch (err) {
-      if (err.response.status === 500) {
-        console.log("prob with server");
-      } else if (err.request) {
-        console.log(err.request);
-      } else {
-        console.log(err.response.data.msg);
-      }
+    } catch (error) {
+      console.log("error in uploading", error);
+      // if (err.response.status === 500) {
+      //   console.log("prob with server");
+      // } else if (err.request) {
+      //   console.log(err.request);
+      // } else {
+      //   console.log(err.response.data.msg);
+      // }
+      dispatch(updateLoader(false));
+
       // console.log(err.config);
     }
   };
