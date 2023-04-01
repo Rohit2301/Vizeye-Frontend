@@ -21,13 +21,13 @@ function App() {
         <div className="h-[3.56rem]" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/realtimefd" element={<RealTimeFD />} />
+          <Route path="/realTimeFd" element={<RealTimeFD />} />
           <Route path="/faceExpResolver" element={<FaceExpResolver />} />
           <Route path="/uploadImage" element={<UploadImage />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/signIn" element={<SignIn />} />
-          {/* <Route  path="/" element={<TextToSpeech />} /> */}
-          {/* <Route  path="/" element={<SpeechToText />} /> */}
+          <Route path="/textToSpeech" element={<TextToSpeech />} />
+          <Route path="/speechToText" element={<SpeechToText />} />
           {/* <Route  path="/" element={<ListeningTtS />} /> */}
           {/* <Route  path="/" element={<FindYourText />} /> */}
           <Route path="*" element={<Error />} />

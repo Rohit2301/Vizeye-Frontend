@@ -128,14 +128,14 @@ const UploadImage = () => {
             ) : (
               <div>{fileName}</div>
             )}
-            <div>
+            <div className=" mt-6 relative font-mons text-xl text-center orangeBtn rounded-lg flex text-black">
               <div
-                className="mt-6"
+                className="px-4 py-2"
                 style={{
                   filter: "drop-shadow(4px 2px 4px rgba(0, 0, 0, 0.25))",
                 }}
               >
-                {<HomeGetStartedBtn data={"Browse"} />}
+                Browse
               </div>
             </div>
           </div>

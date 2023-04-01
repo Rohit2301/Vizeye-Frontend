@@ -1,59 +1,53 @@
-import DownArrow from "../../assets/images/downArrowCircleBg.png";
+import Questions from "../../utils/questions";
+import prupleSquare from "../../assets/productsPageAssests/prupleSquare.png";
+import greenHSSquare from "../../assets/productsPageAssests/greenHSSquare.svg";
+import BlueSDot from "../../assets/productsPageAssests/BlueSDot.png";
+import purpleHSSquare from "../../assets/productsPageAssests/purpleHSSquare.svg";
+import GreenSDot from "../../assets/productsPageAssests/GreenSDot.png";
+import purpleSDot from "../../assets/productsPageAssests/purpleSDot.png";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
+
 const FreqAskedQues = () => {
   return (
-    <div className="flex flex-col lightbg py-16 px-28 text-center text-black gap-y-8 items-center">
-      <div className="text-5xl font-sansationR">Frequently Asked Questions</div>
-      <div
-        className="flex rounded-lg bg-[#83A6B8] items-center py-3 px-6 gap-x-20"
-        style={{ filter: "drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.35))" }}
-      >
-        <div className="font-mons text-lg ">
-          Can I take change the language in text to speech
+    <div className="relative flex flex-col lightbg pt-16 pb-20 px-28 text-center text-black gap-y-8 items-center overflow-hidden">
+      <div className="absolute w-screen h-screen">
+        <div className="relative left-[-2rem] top-[-4rem]">
+          <img src={prupleSquare} alt="pruple square" className="w-20" />
         </div>
-        <div className="w-8">
-          <img src={DownArrow} alt="down arrow" />
+        <div className="relative left-[92rem]">
+          <img src={greenHSSquare} alt="greenhsquare" className="w-20" />
         </div>
+        <div className="relative left-[15rem]">
+          <img src={BlueSDot} alt="blue s dot" className="w-6" />
+        </div>
+        <div className="relative top-[20rem] left-[75rem]">
+          <img src={BlueSDot} alt="blue s dot" className="w-6" />
+        </div>
+        <div className="relative top-[20rem] left-[15rem]">
+          <img src={purpleHSSquare} alt="purple hSsquare" className="w-16" />
+        </div>
+        <div className="relative top-[10rem] left-[5rem]">
+          <img src={GreenSDot} alt="green sdot" className="w-8" />
+        </div>
+        <div className="relative top-[15rem] left-[65rem]">
+          <img src={purpleSDot} alt="purple sdot" className="w-4" />
+        </div>
+        <div className="relative top-[-20rem] left-[-40rem]"></div>
       </div>
-      <div
-        className="flex rounded-lg bg-[#C6D6DE] items-center py-3 px-6 gap-x-20"
-        style={{ filter: "drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5))" }}
-      >
-        <div className="font-mons text-lg w-[35rem]">
-          Can I take change the language in text to speech. Can I take change
-          the language in text to speech
-        </div>
+      <div className="text-5xl font-sansationB mb-16">
+        Frequently Asked Questions
       </div>
-      <div
-        className="flex rounded-lg bg-[#83A6B8] items-center py-3 px-6 gap-x-20"
-        style={{ filter: "drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.35))" }}
-      >
-        <div className="font-mons text-lg ">
-          Can I take change the language in text to speech
+      <div className="flex ">
+        <div className="relative left-[10rem]">
+          <Questions />
         </div>
-        <div className="w-8">
-          <img src={DownArrow} alt="down arrow" />
-        </div>
-      </div>
-      <div
-        className="flex rounded-lg bg-[#83A6B8] items-center py-3 px-6 gap-x-20"
-        style={{ filter: "drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.35))" }}
-      >
-        <div className="font-mons text-lg ">
-          Can I take change the language in text to speech
-        </div>
-        <div className="w-8">
-          <img src={DownArrow} alt="down arrow" />
-        </div>
-      </div>
-      <div
-        className="flex rounded-lg bg-[#83A6B8] items-center py-3 px-6 gap-x-20"
-        style={{ filter: "drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.35))" }}
-      >
-        <div className="font-mons text-lg ">
-          Can I take change the language in text to speech
-        </div>
-        <div className="w-8">
-          <img src={DownArrow} alt="down arrow" />
+        <div className="relative left-[10rem] top-[-5rem]">
+          <Player
+            autoplay
+            loop
+            src="https://assets3.lottiefiles.com/packages/lf20_zrqthn6o.json"
+            style={{ width: "30rem" }}
+          />
         </div>
       </div>
     </div>

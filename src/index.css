@@ -56,12 +56,12 @@
   }
   .lightBlueBg {
     background: linear-gradient(
-      73.36deg,
-      #021a40 12.09%,
-      #08234c 27.2%,
-      #1d3258 50.33%,
-      #17315d 70.15%,
-      #3a4b71 91.37%
+      89.35deg,
+      #021a40 0.71%,
+      #08234c 19.48%,
+      #1d3258 48.19%,
+      #17315d 72.8%,
+      #3a4b71 99.16%
     );
   }
 }
@@ -139,5 +139,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+  }
+  img {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
   }
 }
