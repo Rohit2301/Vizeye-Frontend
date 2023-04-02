@@ -16,9 +16,11 @@ import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { signUp } from "../../redux/userSlice";
+import { onNext } from "../../redux/onNext";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -52,11 +54,11 @@ const theme = createTheme({
 
 const SignUp = () => {
   const navigate = useNavigate();
-  // const [loading, setLoading] = useState();
-  // const [error, setError] = useState();
+  const location = useLocation();
   const { error, loading, isAuthenticated, user } = useSelector(
     (state) => state.user
   );
+  const { url } = useSelector((state) => state.onNext);
   const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -79,27 +81,12 @@ const SignUp = () => {
     // } catch (e) {
     //   console.log("error in axios request of signup");
     // }
-    navigate("/");
-
-    // createUserWithEmailAndPassword(
-    //   auth,
-    //   data.get("email"),
-    //   data.get("password")
-    // )
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     const user = userCredential.user;
-    //     console.log(user);
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     setError(errorCode);
-    //     console.log(errorCode, errorMessage);
-    //     // ..
-    //   });
+    // dispatch(onNext("/"));
+    navigate(location.state?.from || "/", { replace: true });
   };
+  // useEffect(() => {
+  //   navigate("", { replace: true });
+  // }, []);
 
   return (
     <ThemeProvider theme={theme}>

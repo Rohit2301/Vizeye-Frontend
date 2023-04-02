@@ -12,6 +12,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SignUp from "./components/Pages/signup";
 import SignIn from "./components/Pages/signin";
+import ProtectedRoute from "./routes/protectedRoute";
 
 function App() {
   return (
@@ -21,12 +22,35 @@ function App() {
         <div className="h-[3.56rem]" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/realTimeFd" element={<RealTimeFD />} />
+
+          <Route
+            path="/realTimeFd"
+            element={
+              <ProtectedRoute>
+                <RealTimeFD />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/uploadImage"
+            element={
+              <ProtectedRoute>
+                <UploadImage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/textToSpeech"
+            element={
+              <ProtectedRoute>
+                <TextToSpeech />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="/faceExpResolver" element={<FaceExpResolver />} />
-          <Route path="/uploadImage" element={<UploadImage />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/signIn" element={<SignIn />} />
-          <Route path="/textToSpeech" element={<TextToSpeech />} />
           <Route path="/speechToText" element={<SpeechToText />} />
           {/* <Route  path="/" element={<ListeningTtS />} /> */}
           {/* <Route  path="/" element={<FindYourText />} /> */}
