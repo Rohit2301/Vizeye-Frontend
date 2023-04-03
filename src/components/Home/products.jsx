@@ -5,7 +5,7 @@ const Products = () => {
   return (
     <div className="relative lightBlueBg overflow-hidden">
       <div
-        className="relative lightbg h-[65rem] w-screen text-black pt-10 top-[-0.1rem]"
+        className="relative lightbg h-[68rem] w-screen text-black pt-10 top-[-0.1rem]"
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 81%, 0% 100%)",
         }}

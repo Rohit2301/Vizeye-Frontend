@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BlueGradientBtn } from "../../utils/buttons";
 import demoImage from "../../assets/images/ana de armas.jpg";
 import HowToBg from "../Layouts/background/howToBg";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 
 const HowTo = () => {
   return (
@@ -31,20 +32,22 @@ const HowTo = () => {
                 </div>
               </div>
               <div>
-                <img
-                  src={demoImage}
-                  alt="face recognition steps gif"
-                  className="w-[42rem] rounded-xl"
+                <Player
+                  autoplay
+                  loop
+                  src="https://assets10.lottiefiles.com/packages/lf20_dyngxcz9.json"
+                  style={{ width: "16rem" }}
                 />
               </div>
             </div>
             {/* ----------------------------------real time face detection------------------------- */}
             <div className="flex">
               <div>
-                <img
-                  src={demoImage}
-                  alt="face recognition steps gif"
-                  className="w-[42rem] rounded-xl"
+                <Player
+                  autoplay
+                  loop
+                  src="https://assets10.lottiefiles.com/packages/lf20_dyngxcz9.json"
+                  style={{ width: "16rem" }}
                 />
               </div>
               <div className="flex flex-col">
@@ -71,10 +74,11 @@ const HowTo = () => {
                 </div>
               </div>
               <div>
-                <img
-                  src={demoImage}
-                  alt="face recognition steps gif"
-                  className="w-[42rem] rounded-xl"
+                <Player
+                  autoplay
+                  loop
+                  src="https://assets10.lottiefiles.com/packages/lf20_dyngxcz9.json"
+                  style={{ width: "16rem" }}
                 />
               </div>
             </div>

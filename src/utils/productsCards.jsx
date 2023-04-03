@@ -1,6 +1,9 @@
 import demoImage from "../assets/images/ana de armas.jpg";
 import { BlueGradientBtn } from "./buttons";
 import { Link } from "react-router-dom";
+import faceReco from "../assets/images/faceReko.jpg";
+import textTS from "../assets/images/textTS.jpg";
+import realTimeFd from "../assets/images/realTimeFd.jpg";
 
 const PurpleCard = () => {
   return (
@@ -20,9 +23,9 @@ const PurpleCard = () => {
       </div>
       <div>
         <img
-          src={demoImage}
+          src={realTimeFd}
           alt="face detection product card"
-          className="rounded-lg w-72"
+          className="rounded-lg h-[11.125rem]"
         />
       </div>
       <div className="text-[#252525] font-mons">
@@ -57,9 +60,9 @@ const GreenCard = () => {
       </div>
       <div>
         <img
-          src={demoImage}
+          src={textTS}
           alt="face detection product card"
-          className="rounded-lg w-72"
+          className="rounded-lg h-[11.125rem]"
         />
       </div>
       <div className="text-[#252525] font-mons">
@@ -93,9 +96,9 @@ const BlueCard = () => {
       </div>
       <div>
         <img
-          src={demoImage}
+          src={faceReco}
           alt="face detection product card"
-          className="rounded-lg w-72"
+          className="rounded-lg w-52 h-[11.125rem]"
         />
       </div>
       <div className="text-[#252525] font-mons">

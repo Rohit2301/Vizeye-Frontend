@@ -6,6 +6,7 @@ import purpleHSSquare from "../../assets/productsPageAssests/purpleHSSquare.svg"
 import GreenSDot from "../../assets/productsPageAssests/GreenSDot.png";
 import purpleSDot from "../../assets/productsPageAssests/purpleSDot.png";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import blueHSSquare2 from "../../assets/productsPageAssests/blueHSSquare2.png";
 
 const FreqAskedQues = () => {
   return (
@@ -16,9 +17,6 @@ const FreqAskedQues = () => {
         </div>
         <div className="relative left-[92rem]">
           <img src={greenHSSquare} alt="greenhsquare" className="w-20" />
-        </div>
-        <div className="relative left-[15rem]">
-          <img src={BlueSDot} alt="blue s dot" className="w-6" />
         </div>
         <div className="relative top-[20rem] left-[75rem]">
           <img src={BlueSDot} alt="blue s dot" className="w-6" />
@@ -32,7 +30,12 @@ const FreqAskedQues = () => {
         <div className="relative top-[15rem] left-[65rem]">
           <img src={purpleSDot} alt="purple sdot" className="w-4" />
         </div>
-        <div className="relative top-[-20rem] left-[-40rem]"></div>
+        <div className="relative top-[-5rem] left-[10rem]">
+          <img src={BlueSDot} alt="blue s dot" className="w-6" />
+        </div>
+        <div className="relative top-[-22rem] left-[15rem]">
+          <img src={blueHSSquare2} alt="blue hssquare" className="w-16" />
+        </div>
       </div>
       <div className="text-5xl font-sansationB mb-16">
         Frequently Asked Questions

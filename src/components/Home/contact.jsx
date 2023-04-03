@@ -10,22 +10,18 @@ const ContactMe = () => {
   return (
     <div className="flex darkBlueBg items-center py-10 justify-evenly">
       <div className="relative right-10">
-        {/* <Player
+        <Player
           autoplay
           loop
-          src="https://assets1.lottiefiles.com/packages/lf20_hijdc45w/data.json"
+          src="https://assets6.lottiefiles.com/packages/lf20_3ntisyac.json"
           style={{ height: "300px", width: "300px" }}
-        >
-          <Controls
-            visible={true}
-            buttons={["play", "repeat", "frame", "debug"]}
-          />
-        </Player>{" "} */}
-        <img
+        />
+
+        {/* <img
           src={code}
           alt="laptop illustration"
           className="w-[24rem] h-72 rounded-lg"
-        />
+        /> */}
       </div>
       <div className="">
         <img src={RohitKumar} alt="Rohit Kumar masked" className="w-80" />
