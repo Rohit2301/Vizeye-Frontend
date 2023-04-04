@@ -85,7 +85,6 @@ export const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(signUp.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isAuthenticated = true;
         state.error = null;
         state.user = action.payload;

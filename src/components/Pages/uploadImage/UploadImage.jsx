@@ -44,6 +44,7 @@ const UploadImage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(`${process.env.REACT_APP_PORT + "/uploadImage"}`);
   const submitUploadForm = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -52,7 +53,7 @@ const UploadImage = () => {
       dispatch(updateLoader(true));
       console.log("upldaofin");
       const res = await axios.post(
-        "http://localhost:4000/uploadImage",
+        `${process.env.REACT_APP_PORT + "/uploadImage"}`,
         formData,
         {
           headers: {
@@ -86,7 +87,7 @@ const UploadImage = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center items-center darkBlueBg w-full h-full gap-y-10 pt-12 ">
+    <div className="relative flex flex-col justify-center items-center darkBlueBg w-full h-screen gap-y-10 pt-12 ">
       {/* text div */}
       <div className="relative flex flex-col justify-content items-center text-white gap-y-8">
         <div className="text-6xl font-sansationR">Scan your image</div>
