@@ -18,6 +18,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
     "canvas": "^2.10.2",
+    "daisyui": "^2.51.5",
     "face-api.js": "^0.22.2",
     "firebase": "^9.18.0",
     "react": "^18.2.0",
