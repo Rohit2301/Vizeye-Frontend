@@ -6,7 +6,7 @@ let firebaseConfig = {};
 let app = {},
   auth = {};
 
-axios.get("http://localhost:4000/apiKeys").then((res) => {
+axios.get(`${process.env.REACT_APP_PORT + "/apiKeys"}`).then((res) => {
   firebaseConfig = {
     apiKey: res.data.FIREBASE_API_KEY,
     authDomain: res.data.FIREBASE_AUTH_DOMAIN,
