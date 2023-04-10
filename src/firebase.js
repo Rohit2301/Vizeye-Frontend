@@ -18,7 +18,7 @@ axios.get(`${process.env.REACT_APP_PORT + "/apiKeys"}`).then((res) => {
   };
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
-  console.log("bw", auth);
+  console.log("bw", auth, firebaseConfig);
 });
 // Initialize Firebase Authentication and get a reference to the service
 console.log(auth);
