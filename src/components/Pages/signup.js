@@ -59,6 +59,7 @@ const SignUp = () => {
     (state) => state.user
   );
   const { url } = useSelector((state) => state.onNext);
+  const { auth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
