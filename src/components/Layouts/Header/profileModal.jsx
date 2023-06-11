@@ -8,7 +8,6 @@ import { useState } from "react";
 const ProfileModal = ({ showModal, setShowModal }) => {
   const [show, setShow] = useState(false);
   const user = useSelector((state) => state.user);
-  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const ref = useDetectClickOutside({
     onTriggered: () => {

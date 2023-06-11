@@ -1,19 +1,26 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import axios from "axios";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBkRAZOFOKgijwo-uQav60_O0DvdRp2XpQ",
-  authDomain: "vizeye-44544.firebaseapp.com",
-  projectId: "vizeye-44544",
-  storageBucket: "vizeye-44544.appspot.com",
-  messagingSenderId: "78671939730",
-  appId: "1:78671939730:web:227a1721b5be9c7ef2fe4b",
-  measurementId: "G-9D9QE7D84Z",
-};
+let firebaseConfig = {};
+let app = {},
+  auth = {};
 
-const app = initializeApp(firebaseConfig);
+axios.get(`${process.env.REACT_APP_PORT + "/apiKeys"}`).then((res) => {
+  firebaseConfig = {
+    apiKey: res.data.FIREBASE_API_KEY,
+    authDomain: res.data.FIREBASE_AUTH_DOMAIN,
+    projectId: res.data.FIREBASE_PROJECT_ID,
+    storageBucket: res.data.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: res.data.FIREBASE_MESSAGING_SENDER_ID,
+    appId: res.data.FIREBASE_APP_ID,
+    measurementId: res.data.FIREBASE_MEASUREMENT_ID,
+  };
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  console.log("bw", auth, firebaseConfig);
+});
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
-
+console.log(auth);
 export { auth };
 // Initialize the FirebaseUI Widget using Firebase.

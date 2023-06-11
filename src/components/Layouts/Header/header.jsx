@@ -3,38 +3,32 @@ import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import dropDownArrow from "../../../assets/images/dropDownArrow.png";
 import { useDispatch, useSelector } from "react-redux";
-// import { auth } from "../../../firebase";
+import { auth } from "../../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { updateCurrentUser } from "../../../redux/userSlice";
 import ProfileModal from "./profileModal";
 import DemoProfileAvatar from "../../../assets/images/profile avataar.png";
-import updateAuth from "../../../redux/auth";
-import { authOnCall } from "../../../redux/auth";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const { auth } = useSelector((state) => state.auth);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    let unsubcribe;
-    dispatch(authOnCall());
-    if (auth) {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          dispatch(
-            updateCurrentUser({ email: user.email, name: user.displayName })
-          );
-        } else {
-          dispatch(updateCurrentUser(null));
-        }
-      });
-    }
-    // console.log(auth);
-    // unsubcribe();
-  }, [dispatch]);
+    const unsubcribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          updateCurrentUser({ email: user.email, name: user.displayName })
+        );
+      } else {
+        dispatch(updateCurrentUser(null));
+      }
+    });
+    return () => {
+      unsubcribe();
+    };
+  }, []);
 
   return (
     <header

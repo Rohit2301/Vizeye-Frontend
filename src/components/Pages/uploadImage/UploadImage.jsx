@@ -44,7 +44,7 @@ const UploadImage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(`${"http://localhost:4000" + "/uploadImage"}`);
+  console.log(`${process.env.REACT_APP_PORT + "/uploadImage"}`);
   const submitUploadForm = async (e) => {
     e.preventDefault();
     const formData = new FormData();

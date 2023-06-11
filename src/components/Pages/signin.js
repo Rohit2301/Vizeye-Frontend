@@ -13,7 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { signInWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../../firebase";
+import { auth } from "../../firebase";
 import { useState } from "react";
 import { signIn } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,7 +52,6 @@ const SignIn = () => {
   // const [loading, setLoading] = useState();
   // const [error, setError] = useState();
   const { error } = useSelector((state) => state.user);
-  const { auth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
