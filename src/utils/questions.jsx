@@ -24,9 +24,9 @@ const Questions = () => {
             Can I take change the language in text to speech
           </div>
           <div
-            className={`w-8 ${showa ? "rotate-180 delay-50 ease-in-out" : ""}`}
+            className={`w-8 ${showa ? "rotate-180 delay-150 ease-in-out" : ""}`}
           >
-            <img src={DownArrow} alt="down arrow" />
+            <img src={DownArrow} className="rotate-180" alt="down arrow" />
           </div>
         </div>
         {showa ? (
@@ -61,9 +61,9 @@ const Questions = () => {
             Can I take change the language in text to speech
           </div>
           <div
-            className={`w-8 ${showb ? "rotate-180 delay-50 ease-in-out" : ""}`}
+            className={`w-8 ${showb ? "rotate-180 delay-150 ease-in-out" : ""}`}
           >
-            <img src={DownArrow} alt="down arrow" />
+            <img src={DownArrow} className="rotate-180" alt="down arrow" />
           </div>
         </div>
         {showb ? (
@@ -98,9 +98,9 @@ const Questions = () => {
             Can I take change the language in text to speech
           </div>
           <div
-            className={`w-8 ${showc ? "rotate-180 delay-50 ease-in-out" : ""}`}
+            className={`w-8 ${showc ? "rotate-180 delay-150 ease-in-out" : ""}`}
           >
-            <img src={DownArrow} alt="down arrow" />
+            <img src={DownArrow} className="rotate-180" alt="down arrow" />
           </div>
         </div>
         {showc ? (
@@ -135,9 +135,9 @@ const Questions = () => {
             Can I take change the language in text to speech
           </div>
           <div
-            className={`w-8 ${showd ? "rotate-180 delay-50 ease-in-out" : ""}`}
+            className={`w-8 ${showd ? "rotate-180 delay-150 ease-in-out" : ""}`}
           >
-            <img src={DownArrow} alt="down arrow" />
+            <img src={DownArrow} className="rotate-180" alt="down arrow" />
           </div>
         </div>
         {showd ? (
@@ -172,9 +172,9 @@ const Questions = () => {
             Can I take change the language in text to speech
           </div>
           <div
-            className={`w-8 ${showe ? "rotate-180 delay-50 ease-in-out" : ""}`}
+            className={`w-8 ${showe ? "rotate-180 delay-150 ease-in-out" : ""}`}
           >
-            <img src={DownArrow} alt="down arrow" />
+            <img src={DownArrow} className="rotate-180" alt="down arrow" />
           </div>
         </div>
         {showe ? (

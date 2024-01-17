@@ -2,12 +2,13 @@ import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.loader);
+  const { user } = useSelector((state) => state.user);
   const location = useLocation();
   return (
     <>
       {loading === false &&
-        (isAuthenticated === false ? (
+        (!!user === false ? (
           <Navigate
             to="/signUp"
             state={{ from: location.pathname }}

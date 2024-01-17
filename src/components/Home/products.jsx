@@ -3,7 +3,7 @@ import ProductBg from "../Layouts/background/productBg";
 
 const Products = () => {
   return (
-    <div className="relative lightBlueBg overflow-hidden">
+    <div className="relative lightBlueBg overflow-hidden" id="products">
       <div
         className="relative lightbg h-[68rem] w-screen text-black pt-10 top-[-0.1rem]"
         style={{

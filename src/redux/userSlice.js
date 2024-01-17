@@ -69,8 +69,6 @@ export const logOut = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    loading: false,
-    isAuthenticated: false,
     user: null,
     error: null,
   },
@@ -81,44 +79,26 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signUp.pending, (state, action) => {
-        state.loading = true;
-      })
       .addCase(signUp.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
         state.error = null;
         state.user = action.payload;
-        state.loading = false;
       })
       .addCase(signUp.rejected, (state, action) => {
         state.error = action.error.message;
-        state.loading = false;
-      })
-      .addCase(signIn.pending, (state, action) => {
-        state.loading = true;
       })
       .addCase(signIn.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
         state.user = action.payload;
         state.error = null;
-        state.loading = false;
       })
       .addCase(signIn.rejected, (state, action) => {
         state.error = action.error.message;
-        state.loading = false;
-      })
-      .addCase(logOut.pending, (state, action) => {
-        state.loading = true;
       })
       .addCase(logOut.fulfilled, (state, action) => {
-        state.isAuthenticated = false;
         state.error = null;
         state.user = null;
-        state.loading = false;
       })
       .addCase(logOut.rejected, (state, action) => {
         state.error = action.error.message;
-        state.loading = false;
       });
   },
 });

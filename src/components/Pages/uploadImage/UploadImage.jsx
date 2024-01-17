@@ -2,9 +2,8 @@ import { HomeGetStartedBtn } from "../../../utils/buttons";
 import fileUpload from "../../../assets/images/fileUpload.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { updateImageUrl } from "../../../redux/uploadedImage";
 import { useDropzone } from "react-dropzone";
 import { useCallback } from "react";
@@ -13,7 +12,6 @@ import { updateLoader } from "../../../redux/loader";
 const UploadImage = () => {
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("");
-  const { loading } = useSelector((state) => state.loader);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import { Player, Controls } from "@lottiefiles/react-lottie-player";
 
 const HowTo = () => {
   return (
-    <div className="lightbg overflow-hidden">
+    <div className="lightbg overflow-hidden" id="howto">
       <div
         className="relative text-white lightBlueBg h-[76rem] pt-4 top-[-0.1rem]"
         style={{

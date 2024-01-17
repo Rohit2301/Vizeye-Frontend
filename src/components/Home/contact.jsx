@@ -1,5 +1,6 @@
 import laptopIluss from "../../assets/images/laptop illustration.png";
 import RohitKumar from "../../assets/images/rohit kumar masked.png";
+import MohitKumar from "../../assets/images/MohitKumar.png";
 import twitterLogo from "../../assets/images/twitter logo.png";
 import linkedLogo from "../../assets/images/linkedin Logo.png";
 import githubLogo from "../../assets/images/githubLogo.png";
@@ -24,7 +25,7 @@ const ContactMe = () => {
         /> */}
       </div>
       <div className="">
-        <img src={RohitKumar} alt="Rohit Kumar masked" className="w-80" />
+        <img src={MohitKumar} alt="Rohit Kumar masked" className="w-80" />
       </div>
       <div className="">
         <div
@@ -37,7 +38,7 @@ const ContactMe = () => {
             </div>
             <a href="https://twitter.com/RohitDuhan15" target="_black">
               <div className="text-[#222222] text-3xl hover:underline hover:text-black">
-                @RohitDuhan15
+                @MohitDuhan15
               </div>
             </a>
           </div>
@@ -50,7 +51,7 @@ const ContactMe = () => {
               target="_black"
             >
               <div className="text-[#222222] text-3xl hover:underline hover:text-black">
-                Rohit2301
+                Mohit2301
               </div>
             </a>
           </div>
@@ -60,7 +61,7 @@ const ContactMe = () => {
             </div>
             <a href="https://twitter.com/RohitDuhan15" target="_black">
               <div className="text-[#222222] text-3xl hover:underline hover:text-black">
-                Rohit Kumar
+                Mohit Kumar
               </div>
             </a>
           </div>
